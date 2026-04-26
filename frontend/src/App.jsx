@@ -22,7 +22,7 @@ function App() {
 
   const fetchItems = async () => {
     try {
-      const res = await axios.get(`${VITE_API_URL}/items`);
+      const res = await axios.get(`${API_URL}/items`);
       setItems(res.data);
     } catch (err) {
       console.error('Error fetching items:', err);
@@ -40,7 +40,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${VITE_API_URL}/items`, formData);
+      await axios.post(`${API_URL}/items`, formData);
       fetchItems(); // Refresh the list
       setFormData({
         name: '',
@@ -55,7 +55,7 @@ function App() {
 
   const handleDelete = async (id) => {
   try {
-    await axios.delete(`${VITE_API_URL}/items/${id}`);
+    await axios.delete(`${API_URL}/items/${id}`);
     fetchItems();
   } catch (err) {
     console.error('Error deleting item:', err);
