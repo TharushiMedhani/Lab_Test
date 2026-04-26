@@ -1,7 +1,15 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL;
+const getApiUrl = () => {
+  const rawUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+  const urlWithProtocol = rawUrl.startsWith('http') ? rawUrl : `https://${rawUrl}`;
+  const trimmedUrl = urlWithProtocol.replace(/\/$/, '');
+
+  return trimmedUrl.endsWith('/api') ? trimmedUrl : `${trimmedUrl}/api`;
+};
+
+const API_URL = getApiUrl();
 
 function App() {
   const [items, setItems] = useState([]);
